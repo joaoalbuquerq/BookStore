@@ -1,5 +1,6 @@
 package com.bookstore.api.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -15,4 +16,9 @@ public class Review implements Serializable {
 
     @Column(nullable = false)
     private String comment;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToOne
+    @JoinColumn(name = "book_id")
+    private Book book;
 }
