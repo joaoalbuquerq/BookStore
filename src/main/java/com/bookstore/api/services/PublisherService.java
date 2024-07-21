@@ -2,6 +2,7 @@ package com.bookstore.api.services;
 
 import com.bookstore.api.dto.PublisherDTO;
 import com.bookstore.api.models.Publisher;
+import com.bookstore.api.repositories.BookRepository;
 import com.bookstore.api.repositories.PublisherRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +10,16 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class PublisherService {
 
     @Autowired
     PublisherRepository publisherRepository;
+
+    @Autowired
+    BookRepository bookRepository;
 
     public List<Publisher> getAll(){
         return publisherRepository.findAll();
@@ -32,7 +37,7 @@ public class PublisherService {
 
         var pub = new Publisher();
         pub.setName(dto.name());
-        pub.setBooks(null);
+        pub.setBooks(bookRepository.findAllById(dto.bookIds()).stream().collect(Collectors.toSet()));
 
         return publisherRepository.save(pub);
     }
@@ -45,7 +50,7 @@ public class PublisherService {
             pub.setName(dto.name());
 
         if(dto.bookIds() != null && !dto.bookIds().isEmpty())
-            pub.setBooks(null);
+            pub.setBooks(bookRepository.findAllById(dto.bookIds()).stream().collect(Collectors.toSet()));
 
         return publisherRepository.save(pub);
     }

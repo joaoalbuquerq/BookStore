@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class AuthorService {
@@ -35,7 +36,7 @@ public class AuthorService {
     public Author createAuthor(AuthorDTO dto){
         var author = new Author();
         author.setName(dto.name());
-        author.setBooks(null);
+        author.setBooks(bookRepository.findAllById(dto.bookIds()).stream().collect(Collectors.toSet()));
 
         return authorRepository.save(author);
     }
@@ -47,7 +48,7 @@ public class AuthorService {
             author.setName(dto.name());
 
         if(dto.bookIds() != null && !dto.bookIds().isEmpty())
-            author.setBooks(null);
+            author.setBooks(bookRepository.findAllById(dto.bookIds()).stream().collect(Collectors.toSet()));
 
         return authorRepository.save(author);
     }

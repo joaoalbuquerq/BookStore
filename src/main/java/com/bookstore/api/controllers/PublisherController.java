@@ -37,7 +37,7 @@ public class PublisherController {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.create(dto));
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public ResponseEntity<Publisher> updatePublisher(@RequestBody PublisherDTO dto, @PathVariable String id){
         return ResponseEntity.ok(service.update(dto,id));
     }
