@@ -2,12 +2,20 @@ package com.bookstore.api.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.UUID;
 
 @Entity
 @Table(name = "TB_REVIEW")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Review implements Serializable {
 
     @Id

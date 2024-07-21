@@ -1,5 +1,6 @@
 package com.bookstore.api.models;
 
+import com.bookstore.api.dto.BookDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
