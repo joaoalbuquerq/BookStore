@@ -22,12 +22,12 @@ public class BookController {
         return ResponseEntity.ok(service.findAllBooks());
     }
 
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     public ResponseEntity<Book> findById(@PathVariable String id){
         return ResponseEntity.ok(service.findById(id));
     }
 
-    @GetMapping("/title")
+    @GetMapping("/title/{title}")
     public ResponseEntity<Book> findByTitle(@PathVariable String title){
         return ResponseEntity.ok(service.findByTitle(title));
     }
@@ -42,7 +42,7 @@ public class BookController {
         return ResponseEntity.ok(service.updateBook(dto, id));
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity deleteBook(@PathVariable String id){
         service.deleteBook(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
